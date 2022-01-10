@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
+
 learn = tf.contrib.learn
 tf.logging.set_verbosity(tf.logging.ERROR)
 
@@ -17,11 +18,13 @@ max_examples = 10000
 data = data[:max_examples]
 labels = labels[:max_examples]
 
+
 # Display some digits
 def display(i):
     img = test_data[i]
     plt.title('Example %d. Label: %d' % (i, test_labels[i]))
-    plt.imshow(img.reshape((28,28)), cmap=plt.cm.gray_r)   
+    plt.imshow(img.reshape((28, 28)), cmap=plt.cm.gray_r)
+
 
 for i in range(len(data)):
     display(i)
@@ -46,17 +49,17 @@ display(0)
 # one it gets wrong
 predict = classifier.predict((test_data[8]), (test_labels[8]))
 
-print ("Predicted %d, Label: %d" % (predict))
+print("Predicted %d, Label: %d" % (predict))
 display(8)
 
 # Let's see if we can reproduce the pictures of the weights in the TensorFlow Basic MNSIT
 weights = classifier.weights_
-f, axes = plt.subplots(2, 5, figsize=(10,4))
+f, axes = plt.subplots(2, 5, figsize=(10, 4))
 axes = axes.reshape(-1)
 for i in range(len(axes)):
     a = axes[i]
     a.imshow(weights.T[i].reshape(28, 28), cmap=plt.cm.seismic)
     a.set_title(i)
-    a.set_xticks(()) # ticks be gone
+    a.set_xticks(())  # ticks be gone
     a.set_yticks(())
 plt.show()

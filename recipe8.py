@@ -17,17 +17,21 @@ training_data = [
 
 # print the tree
 header = ["color", "diameter", "label"]
+
+
 # print(header)
 
 
 def unique_vals(rows, col):
-    #Find the unique values for a column in a dataset.
+    # Find the unique values for a column in a dataset.
     return set([row[col] for row in rows])
+
+
 # unique_vals(training_data, 0)
 # returns column 0 of training data
 
 def class_counts(rows):
-    #Counts the number of each type of example in a dataset.
+    # Counts the number of each type of example in a dataset.
     counts = {}  # a dictionary of label -> count.
     for row in rows:
         # in our dataset format, the label is always the last column
@@ -37,12 +41,14 @@ def class_counts(rows):
         counts[label] += 1
     return counts
 
+
 # class_counts(training_data)
 # returns how many times a label is present
 
 def is_numeric(value):
     """Test if a value is numeric. (E.g Distinguish color names from diameter)"""
     return isinstance(value, int) or isinstance(value, float)
+
 
 # Demo
 # is_numeric(7)
@@ -59,15 +65,15 @@ class Question:
 
     def __init__(self, column, value):
         # stores for the threshold used to partition the data
-        self.column = column # string of type of feature
-        self.value = value # value of the given node in the table
+        self.column = column  # string of type of feature
+        self.value = value  # value of the given node in the table
 
     def match(self, example):
         # Compare the feature value in an example to the
         # feature value in this question.
         val = example[self.column]
         # print(val) prints the feature at self.column and the given index of training_data
-        if is_numeric(val): # returns boolean values
+        if is_numeric(val):  # returns boolean values
             return val >= self.value
         else:
             return val == self.value
@@ -81,14 +87,16 @@ class Question:
         return "Is %s %s %s?" % (
             header[self.column], condition, str(self.value))
 
+
 # Prints example questions
-q = Question(0, 'Green') # Is color == Green?
+q = Question(0, 'Green')  # Is color == Green?
 print(q)
-print(Question(1, 3)) # Is diameter >= 3?
+print(Question(1, 3))  # Is diameter >= 3?
 
 # An example from the training set to see if it matches the question
 example = training_data[0]
-print(q.match(example)) # this will be true, since the first example is Green.
+print(q.match(example))  # this will be true, since the first example is Green.
+
 
 def partition(rows, question):
     """Partitions a dataset.
@@ -97,15 +105,18 @@ def partition(rows, question):
     so, add it to 'true rows', otherwise, add it to 'false rows'.
     """
     true_rows, false_rows = [], []
-    for row in rows: # If the question is true for the given data, place it in true, otherwise it's false
+    for row in rows:  # If the question is true for the given data, place it in true, otherwise it's false
         if question.match(row):
             true_rows.append(row)
         else:
             false_rows.append(row)
     return true_rows, false_rows
 
+
 # Partition the training data based on whether rows are Red.
 true_rows, false_rows = partition(training_data, Question(0, 'Red'))
+
+
 # print(true_rows) Contains rows with Red
 
 def gini(rows):
@@ -119,12 +130,13 @@ def gini(rows):
     impurity = 1
     for lbl in counts:
         prob_of_lbl = counts[lbl] / float(len(rows))
-        impurity -= prob_of_lbl**2
+        impurity -= prob_of_lbl ** 2
     return impurity
+
 
 # First, we'll look at a dataset with no mixing.
 no_mixing = [['Apple'],
-              ['Apple']]
+             ['Apple']]
 # this will return 0
 print(gini(no_mixing))
 
@@ -142,6 +154,7 @@ lots_of_mixing = [['Apple'],
 # This will return 0.8
 print(gini(lots_of_mixing))
 
+
 def info_gain(left, right, current_uncertainty):
     """Information Gain.
 
@@ -151,9 +164,11 @@ def info_gain(left, right, current_uncertainty):
     p = float(len(left)) / (len(left) + len(right))
     return current_uncertainty - p * gini(left) - (1 - p) * gini(right)
 
+
 # Calculate the uncertainy of our training data.
 current_uncertainty = gini(training_data)
 print(current_uncertainty)
+
 
 def find_best_split(rows):
     """Find the best question to ask by iterating over every feature / value
@@ -190,9 +205,11 @@ def find_best_split(rows):
 
     return best_gain, best_question
 
+
 # Find the best question to ask first for our toy dataset.
 best_gain, best_question = find_best_split(training_data)
 print(best_question)
+
 
 class Leaf:
     """A Leaf node classifies data.
@@ -203,6 +220,7 @@ class Leaf:
 
     def __init__(self, rows):
         self.predictions = class_counts(rows)
+
 
 class Decision_Node:
     """A Decision Node asks a question.
@@ -217,6 +235,7 @@ class Decision_Node:
         self.question = question
         self.true_branch = true_branch
         self.false_branch = false_branch
+
 
 def build_tree(rows):
     """Builds the tree.
@@ -253,9 +272,11 @@ def build_tree(rows):
     # dependingo on the answer.
     return Decision_Node(question, true_branch, false_branch)
 
+
 # Recieves the entire training set as input
 my_tree = build_tree(training_data)
 print(my_tree)
+
 
 def classify(row, node):
     """See the 'rules of recursion' above."""
@@ -272,8 +293,10 @@ def classify(row, node):
     else:
         return classify(row, node.false_branch)
 
+
 # training data is an apple with confidence 1.
 print(classify(training_data[0], my_tree))
+
 
 def print_leaf(counts):
     """A nicer way to print the predictions at a leaf."""
@@ -282,6 +305,7 @@ def print_leaf(counts):
     for lbl in counts.keys():
         probs[lbl] = str(int(counts[lbl] / total * 100)) + "%"
     return probs
+
 
 # Printing that a bit nicer
 print(print_leaf(classify(training_data[0], my_tree)))
@@ -296,5 +320,5 @@ testing_data = [
 ]
 
 for row in testing_data:
-    print ("Actual: %s. Predicted: %s" %
-           (row[-1], print_leaf(classify(row, my_tree))))
+    print("Actual: %s. Predicted: %s" %
+          (row[-1], print_leaf(classify(row, my_tree))))

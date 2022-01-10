@@ -1,8 +1,9 @@
 from sklearn import tree
 
-#Input, 0 = bumpy, 1 = smooth
+# Training data
+# Input, 0 = bumpy, 1 = smooth
 features = [[140, 1], [130, 1], [150, 0], [170, 0]]
-#Output, 0 = apple, 1 = orange
+# Output, 0 = apple, 1 = orange
 labels = [0, 0, 1, 1]
 
 # Defines type of classifier

@@ -13,7 +13,7 @@ print(iris.data[0]) # features
 print(iris.target[0]) # labels
 '''
 
-testIdx = [0, 50, 100] # each index where a new set of flowers begin
+testIdx = [0, 50, 100]  # each index where a new set of flowers begin
 
 # training data
 trainTarget = np.delete(iris.target, testIdx)
@@ -27,7 +27,7 @@ testData = iris.data[testIdx]
 clf = tree.DecisionTreeClassifier()
 clf.fit(trainData, trainTarget)
 
-print(testTarget) # what our label is expected to be
+print(testTarget)  # what our label is expected to be
 print(clf.predict(testData))
 
 print(testData[0], testTarget[0])
