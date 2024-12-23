@@ -20,11 +20,11 @@ Exploration of Machine Learning concepts and popular Python frameworks to explor
 - Resource utilization
   - Memory utilization and how each framework may lend itself to a given selection of hardware (embedded, etc.)
 
-Read entire project report: [487_report.pdf](./docs/487-report.pdf)
+Read entire project report: [487-report.pdf](./docs/487-report.pdf)
 
 ## Module: Scikit-Learn - Henry Shires
 
-My playground using the Scikit-Learn machine learning library for Python, following Google's *Machine Learning Recipes* by Josh Gordon. I desired to develop a fundamental understanding of machine learning and how it implements into source code to solve problems. I then used the knowledge I gained to learn about how Unity enables developers to utilize ML in 3D game design. I hoped to implement their tools into a game of my own, however I was unsuccessful.
+My playground using the Scikit-Learn machine learning library for Python, following Google's *Machine Learning Recipes* by Josh Gordon. I desired to develop a fundamental understanding of machine learning and how it implements into source code to solve problems.
 
 ## Installation
 
