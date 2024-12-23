@@ -1,0 +1,4 @@
+Number		Dims		Class Data
+0		(64, 64, 3)		b'koala, koala bear, kangaroo bear, native bear, Phascolarctos cinereus' (class index: 68 - id: b'n01882714')
+1		(64, 64, 3)		b'Chihuahua' (class index: 182 - id: b'n02085620')
+2		(64, 64, 3)		b'cannon' (class index: 80 - id: b'n02950826')
