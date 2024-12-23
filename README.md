@@ -20,7 +20,7 @@ Exploration of Machine Learning concepts and popular Python frameworks to explor
 - Resource utilization
   - Memory utilization and how each framework may lend itself to a given selection of hardware (embedded, etc.)
 
-Read entire project report: [487_report.pdf](./docs/487_report.pdf)
+Read entire project report: [487_report.pdf](./docs/487-report.pdf)
 
 ## Module: Scikit-Learn - Henry Shires
 
